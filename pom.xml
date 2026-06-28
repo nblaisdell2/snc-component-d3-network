@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.snc.npm</groupId>
+        <artifactId>snc-npm-parent</artifactId>
+        <version>5.1.0.1</version>
+    </parent>
+    <artifactId>network-chart-uic</artifactId>
+    <description>D3 Network Graph for UI Builder</description>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <properties>
+        <plugin.dir>com.network_chart_uic</plugin.dir>
+        <node.version>v16.16.0</node.version>
+        <npm.version>8.5.5</npm.version>
+    </properties>
+</project>

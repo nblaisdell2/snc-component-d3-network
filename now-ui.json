@@ -1,0 +1,462 @@
+{
+  "components": {
+    "x-1295779-network-chart-uic": {
+      "innerComponents": [],
+      "uiBuilder": {
+        "associatedTypes": [
+          "global.core",
+          "global.landing-page"
+        ],
+        "label": "D3 Network Graph",
+        "tileIcon": "./tile-icon/generic-tile-icon.svg",
+        "description": "A configurable force-directed network graph rendered with D3.js. Nodes are entities (e.g. CMDB configuration items) colored by group and sized by value; links show relationships, optionally directed with arrowheads. Interactive hover highlighting of neighbors, draggable nodes, tooltips, and click/hover events. Restyle it entirely from the property panel.",
+        "category": "primitives"
+      },
+      "properties": [
+        {
+          "name": "data",
+          "label": "Data \u00b7 Graph",
+          "description": "Graph object: { nodes: [ { id, label, group, value, color } ], links: [ { source, target, value } ] }. Link source/target reference a node id (or index). Bind to a data resource or leave empty to show built-in sample data.",
+          "fieldType": "json"
+        },
+        {
+          "name": "chartTitle",
+          "label": "Header & border \u00b7 Title",
+          "description": "Title rendered above the chart. Leave blank to hide.",
+          "fieldType": "string",
+          "defaultValue": "CMDB Dependency Map"
+        },
+        {
+          "name": "titleFontSize",
+          "label": "Header & border \u00b7 Title font size",
+          "description": "Font size of the chart title, in pixels.",
+          "fieldType": "number",
+          "defaultValue": 18
+        },
+        {
+          "name": "titleColor",
+          "label": "Header & border \u00b7 Title color",
+          "description": "Text color of the chart title.",
+          "fieldType": "string",
+          "defaultValue": "#374151"
+        },
+        {
+          "name": "componentWidth",
+          "label": "Header & border \u00b7 Width",
+          "description": "Outer width of the whole widget. CSS length, e.g. \"50%\", \"640px\". A bare number is treated as pixels.",
+          "fieldType": "string",
+          "defaultValue": "50%"
+        },
+        {
+          "name": "componentPadding",
+          "label": "Header & border \u00b7 Padding",
+          "description": "Padding around the whole widget. CSS length, e.g. \"12px\", \"1rem\". A bare number is treated as pixels.",
+          "fieldType": "string",
+          "defaultValue": "12px"
+        },
+        {
+          "name": "backgroundColor",
+          "label": "Header & border \u00b7 Background color",
+          "description": "Chart background. CSS color or \"transparent\".",
+          "fieldType": "string",
+          "defaultValue": "transparent"
+        },
+        {
+          "name": "borderColor",
+          "label": "Header & border \u00b7 Border color",
+          "description": "Border color of the widget. Leave blank for no border.",
+          "fieldType": "string",
+          "defaultValue": ""
+        },
+        {
+          "name": "borderWidth",
+          "label": "Header & border \u00b7 Border width",
+          "description": "Border thickness in pixels. 0 = no border.",
+          "fieldType": "number",
+          "defaultValue": 0
+        },
+        {
+          "name": "borderRadius",
+          "label": "Header & border \u00b7 Border radius",
+          "description": "Rounded corners of the widget, in pixels.",
+          "fieldType": "number",
+          "defaultValue": 0
+        },
+        {
+          "name": "chartHeight",
+          "label": "Display \u00b7 Chart height (px)",
+          "description": "Height of the chart in pixels.",
+          "fieldType": "number",
+          "defaultValue": 420
+        },
+        {
+          "name": "fontFamily",
+          "label": "Display \u00b7 Base font family",
+          "description": "CSS font-family for chart text. Blank = inherit from the page.",
+          "fieldType": "string",
+          "defaultValue": ""
+        },
+        {
+          "name": "animate",
+          "label": "Display \u00b7 Animate",
+          "description": "Animate the graph settling into place on first render and on data change.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "animationDuration",
+          "label": "Display \u00b7 Animation duration (ms)",
+          "description": "Duration of the live settling animation in milliseconds.",
+          "fieldType": "number",
+          "defaultValue": 800
+        },
+        {
+          "name": "animationEasing",
+          "label": "Display \u00b7 Animation easing",
+          "description": "Easing curve hint for the settling animation.",
+          "fieldType": "choice",
+          "defaultValue": "cubicOut",
+          "typeMetadata": {
+            "variant": "dropdown",
+            "choices": [
+              {
+                "label": "Linear",
+                "value": "linear"
+              },
+              {
+                "label": "Cubic out",
+                "value": "cubicOut"
+              },
+              {
+                "label": "Cubic in-out",
+                "value": "cubicInOut"
+              },
+              {
+                "label": "Quad out",
+                "value": "quadOut"
+              },
+              {
+                "label": "Exp out",
+                "value": "expOut"
+              },
+              {
+                "label": "Back out",
+                "value": "backOut"
+              },
+              {
+                "label": "Bounce out",
+                "value": "bounceOut"
+              },
+              {
+                "label": "Elastic out",
+                "value": "elasticOut"
+              }
+            ]
+          }
+        },
+        {
+          "name": "hoverHighlight",
+          "label": "Display \u00b7 Hover highlight",
+          "description": "Emphasize a node and its connected links on mouse-over.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "hoverDimOthers",
+          "label": "Display \u00b7 Dim others on hover",
+          "description": "Fade unconnected nodes and links while hovering a node.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "chargeStrength",
+          "label": "Layout \u00b7 Charge strength",
+          "description": "Many-body force strength. Negative values repel nodes (spread the graph out); positive values attract. More negative = more spacing.",
+          "fieldType": "number",
+          "defaultValue": -180
+        },
+        {
+          "name": "linkDistance",
+          "label": "Layout \u00b7 Link distance (px)",
+          "description": "Target resting length of each link, in pixels.",
+          "fieldType": "number",
+          "defaultValue": 60
+        },
+        {
+          "name": "collidePadding",
+          "label": "Layout \u00b7 Collision padding (px)",
+          "description": "Extra space added around each node's radius for collision avoidance, in pixels.",
+          "fieldType": "number",
+          "defaultValue": 4
+        },
+        {
+          "name": "simulationTicks",
+          "label": "Layout \u00b7 Settle iterations",
+          "description": "How many simulation iterations to run synchronously before drawing, so a stable layout renders immediately. Higher = more settled (and slower).",
+          "fieldType": "number",
+          "defaultValue": 200
+        },
+        {
+          "name": "nodeRadius",
+          "label": "Nodes \u00b7 Radius (px)",
+          "description": "Base circle radius for nodes, in pixels. Used when not sizing by a value field.",
+          "fieldType": "number",
+          "defaultValue": 8
+        },
+        {
+          "name": "nodeRadiusField",
+          "label": "Nodes \u00b7 Size by field",
+          "description": "Name of a numeric field on each node used to scale its radius (e.g. \"value\"). Blank = uniform radius. Falls back to node.value when values are present.",
+          "fieldType": "string",
+          "defaultValue": ""
+        },
+        {
+          "name": "nodeMinRadius",
+          "label": "Nodes \u00b7 Min radius (px)",
+          "description": "Smallest node radius when sizing by a value field.",
+          "fieldType": "number",
+          "defaultValue": 4
+        },
+        {
+          "name": "nodeMaxRadius",
+          "label": "Nodes \u00b7 Max radius (px)",
+          "description": "Largest node radius when sizing by a value field.",
+          "fieldType": "number",
+          "defaultValue": 22
+        },
+        {
+          "name": "linkWidth",
+          "label": "Links \u00b7 Width (px)",
+          "description": "Stroke width of links, in pixels. Used when not scaling by a value field.",
+          "fieldType": "number",
+          "defaultValue": 1.5
+        },
+        {
+          "name": "linkWidthField",
+          "label": "Links \u00b7 Width by field",
+          "description": "Name of a numeric field on each link used to scale its width (e.g. \"value\"). Blank = uniform width.",
+          "fieldType": "string",
+          "defaultValue": ""
+        },
+        {
+          "name": "linkColor",
+          "label": "Links \u00b7 Color",
+          "description": "Stroke color of links.",
+          "fieldType": "string",
+          "defaultValue": "#cbd5e1"
+        },
+        {
+          "name": "linkOpacity",
+          "label": "Links \u00b7 Opacity",
+          "description": "Opacity of links, 0 (transparent) to 1 (opaque).",
+          "fieldType": "number",
+          "defaultValue": 0.6
+        },
+        {
+          "name": "directed",
+          "label": "Links \u00b7 Directed (arrowheads)",
+          "description": "Draw arrowheads at the target end of each link to show direction.",
+          "fieldType": "boolean",
+          "defaultValue": false
+        },
+        {
+          "name": "showLabels",
+          "label": "Labels \u00b7 Show node labels",
+          "description": "Draw a text label next to each node.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "labelField",
+          "label": "Labels \u00b7 Label field",
+          "description": "Node field used for the label text (e.g. \"label\" or \"id\"). Falls back to id when blank/missing.",
+          "fieldType": "string",
+          "defaultValue": "label"
+        },
+        {
+          "name": "labelFontSize",
+          "label": "Labels \u00b7 Font size (px)",
+          "description": "Font size of node labels, in pixels.",
+          "fieldType": "number",
+          "defaultValue": 11
+        },
+        {
+          "name": "labelColor",
+          "label": "Labels \u00b7 Color",
+          "description": "Text color of node labels.",
+          "fieldType": "string",
+          "defaultValue": "#374151"
+        },
+        {
+          "name": "colorScheme",
+          "label": "Colors \u00b7 Color scheme",
+          "description": "Categorical color scale that maps a node's group to a color. \"Custom palette\" uses the colors below; the others are built-in D3 schemes. An explicit node.color always overrides the scheme.",
+          "fieldType": "choice",
+          "defaultValue": "category10",
+          "typeMetadata": {
+            "variant": "dropdown",
+            "choices": [
+              {
+                "label": "Custom palette",
+                "value": "custom"
+              },
+              {
+                "label": "Category10",
+                "value": "category10"
+              },
+              {
+                "label": "Tableau10",
+                "value": "tableau10"
+              },
+              {
+                "label": "Set2",
+                "value": "set2"
+              },
+              {
+                "label": "Set3",
+                "value": "set3"
+              },
+              {
+                "label": "Paired",
+                "value": "paired"
+              },
+              {
+                "label": "Dark2",
+                "value": "dark2"
+              },
+              {
+                "label": "Pastel1",
+                "value": "pastel1"
+              },
+              {
+                "label": "Accent",
+                "value": "accent"
+              }
+            ]
+          }
+        },
+        {
+          "name": "showTooltip",
+          "label": "Tooltip \u00b7 Show tooltip",
+          "description": "Show a hover tooltip over each node.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "tooltipTemplate",
+          "label": "Tooltip \u00b7 Template",
+          "description": "Tooltip content (light HTML allowed). Tokens: {label}, {id}, {group}, {value}, {degree}, {swatch} (a color dot for the node), {color}, and any custom key on the node. Interpolated values are HTML-escaped.",
+          "fieldType": "string",
+          "defaultValue": "{swatch}<strong>{label}</strong><br/>{group}"
+        },
+        {
+          "name": "tooltipFollowCursor",
+          "label": "Tooltip \u00b7 Follow cursor",
+          "description": "Tooltip follows the pointer. Turn off to anchor it near the hovered node. Either way it's clamped within the chart bounds.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "tooltipBackground",
+          "label": "Tooltip \u00b7 Background color",
+          "description": "Tooltip background (CSS color, supports rgba).",
+          "fieldType": "string",
+          "defaultValue": "rgba(17,24,39,0.92)"
+        },
+        {
+          "name": "tooltipTextColor",
+          "label": "Tooltip \u00b7 Text color",
+          "description": "Tooltip text color.",
+          "fieldType": "string",
+          "defaultValue": "#ffffff"
+        },
+        {
+          "name": "tooltipFontSize",
+          "label": "Tooltip \u00b7 Font size",
+          "description": "Tooltip font size, in pixels.",
+          "fieldType": "number",
+          "defaultValue": 12
+        }
+      ],
+      "actions": [
+        {
+          "name": "CHART_CLICKED",
+          "label": "Chart clicked",
+          "description": "Fired when the user clicks the chart background (not a specific node).",
+          "payload": [
+            {
+              "name": "nodeCount",
+              "label": "Number of nodes",
+              "description": "How many nodes are rendered."
+            },
+            {
+              "name": "linkCount",
+              "label": "Number of links",
+              "description": "How many links are rendered."
+            }
+          ]
+        },
+        {
+          "name": "NODE_CLICKED",
+          "label": "Node clicked",
+          "description": "Fired when the user clicks an individual node. Use to drill into details for that CI/entity.",
+          "payload": [
+            {
+              "name": "id",
+              "label": "Node id",
+              "description": "Identifier of the clicked node."
+            },
+            {
+              "name": "label",
+              "label": "Node label",
+              "description": "Display label of the clicked node."
+            },
+            {
+              "name": "group",
+              "label": "Group",
+              "description": "Category/group of the clicked node."
+            },
+            {
+              "name": "value",
+              "label": "Value",
+              "description": "Numeric value of the clicked node (null when absent)."
+            },
+            {
+              "name": "degree",
+              "label": "Degree",
+              "description": "Number of links incident to the node."
+            }
+          ]
+        },
+        {
+          "name": "NODE_HOVERED",
+          "label": "Node hovered",
+          "description": "Fired when the user hovers a node. Useful for syncing external tooltips or details panels.",
+          "payload": [
+            {
+              "name": "id",
+              "label": "Node id",
+              "description": "Identifier of the hovered node."
+            },
+            {
+              "name": "label",
+              "label": "Node label",
+              "description": "Display label of the hovered node."
+            },
+            {
+              "name": "group",
+              "label": "Group",
+              "description": "Category/group of the hovered node."
+            },
+            {
+              "name": "value",
+              "label": "Value",
+              "description": "Numeric value of the hovered node (null when absent)."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "scopeName": "x_1295779_network_0"
+}
