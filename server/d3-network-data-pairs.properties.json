@@ -1,0 +1,54 @@
+[
+  {
+    "name": "table",
+    "label": "Table",
+    "description": "Table to query, e.g. 'incident'.",
+    "fieldType": "string",
+    "mandatory": true,
+    "defaultValue": "incident"
+  },
+  {
+    "name": "filter",
+    "label": "Filter (encoded query)",
+    "description": "Optional encoded query to scope the rows.",
+    "fieldType": "string",
+    "defaultValue": ""
+  },
+  {
+    "name": "sourceField",
+    "label": "Source field",
+    "description": "Field whose value is one end of each link, e.g. 'assignment_group'.",
+    "fieldType": "string",
+    "mandatory": true,
+    "defaultValue": "assignment_group"
+  },
+  {
+    "name": "targetField",
+    "label": "Target field",
+    "description": "Field whose value is the other end of each link, e.g. 'category'.",
+    "fieldType": "string",
+    "mandatory": true,
+    "defaultValue": "category"
+  },
+  {
+    "name": "metric",
+    "label": "Metric",
+    "description": "Link weight: count | sum | avg | min | max. Default 'count'.",
+    "fieldType": "string",
+    "defaultValue": "count"
+  },
+  {
+    "name": "valueField",
+    "label": "Value field",
+    "description": "Numeric field to aggregate (required when metric is not 'count').",
+    "fieldType": "string",
+    "defaultValue": ""
+  },
+  {
+    "name": "useDisplayValue",
+    "label": "Use display values for nodes",
+    "description": "Build nodes from display values (readable) instead of raw values.",
+    "fieldType": "boolean",
+    "defaultValue": true
+  }
+]

@@ -1,12 +1,9 @@
 {
   "components": {
-    "x-1295779-network-chart-uic": {
+    "x-2114311-network-chart-uic": {
       "innerComponents": [],
       "uiBuilder": {
-        "associatedTypes": [
-          "global.core",
-          "global.landing-page"
-        ],
+        "associatedTypes": ["global.core", "global.landing-page"],
         "label": "D3 Network Graph",
         "tileIcon": "./tile-icon/generic-tile-icon.svg",
         "description": "A configurable force-directed network graph rendered with D3.js. Nodes are entities (e.g. CMDB configuration items) colored by group and sized by value; links show relationships, optionally directed with arrowheads. Interactive hover highlighting of neighbors, draggable nodes, tooltips, and click/hover events. Restyle it entirely from the property panel.",
@@ -155,6 +152,13 @@
           }
         },
         {
+          "name": "animationStagger",
+          "label": "Animation \u00b7 Animation stagger (ms)",
+          "description": "Delay between categories for a cascade grow-in (0 = all bars animate together).",
+          "fieldType": "number",
+          "defaultValue": 0
+        },
+        {
           "name": "hoverHighlight",
           "label": "Display \u00b7 Hover highlight",
           "description": "Emphasize a node and its connected links on mouse-over.",
@@ -162,9 +166,65 @@
           "defaultValue": true
         },
         {
+          "name": "hoverColor",
+          "label": "Display \u00b7 Hover color (when hover highlight on)",
+          "description": "Color a column turns on hover. Blank = automatically brighten the column's own color.",
+          "fieldType": "string",
+          "defaultValue": ""
+        },
+        {
           "name": "hoverDimOthers",
           "label": "Display \u00b7 Dim others on hover",
           "description": "Fade unconnected nodes and links while hovering a node.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "dropShadow",
+          "label": "Drop shadow · Drop shadow",
+          "description": "Apply a soft drop shadow to the columns.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "shadowColor",
+          "label": "Drop shadow · Shadow color (when drop shadow on)",
+          "description": "Color of the column drop shadow (supports rgba).",
+          "fieldType": "string",
+          "defaultValue": "rgba(0,0,0,0.25)"
+        },
+        {
+          "name": "shadowBlur",
+          "label": "Drop shadow · Shadow blur (when drop shadow on)",
+          "description": "Blur radius of the drop shadow, in pixels.",
+          "fieldType": "number",
+          "defaultValue": 4
+        },
+        {
+          "name": "enableZoom",
+          "label": "Zoom \u00b7 Enable zoom & pan",
+          "description": "Zoom with the mouse wheel / pinch and pan by dragging the background. Double-click zooms in (shift+double-click zooms out).",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "minZoom",
+          "label": "Zoom \u00b7 Min zoom",
+          "description": "Smallest allowed zoom scale (e.g. 0.25 = zoomed out to quarter size).",
+          "fieldType": "number",
+          "defaultValue": 0.25
+        },
+        {
+          "name": "maxZoom",
+          "label": "Zoom \u00b7 Max zoom",
+          "description": "Largest allowed zoom scale (e.g. 4 = 4x magnification).",
+          "fieldType": "number",
+          "defaultValue": 4
+        },
+        {
+          "name": "showZoomControls",
+          "label": "Zoom \u00b7 Show zoom buttons",
+          "description": "Show +, \u2212 and reset buttons in the top-right corner of the chart. Requires zoom to be enabled.",
           "fieldType": "boolean",
           "defaultValue": true
         },
@@ -225,6 +285,20 @@
           "defaultValue": 22
         },
         {
+          "name": "nodeStroke",
+          "label": "Nodes · Border color",
+          "description": "Outline color of the node bars. Blank = no outline.",
+          "fieldType": "string",
+          "defaultValue": ""
+        },
+        {
+          "name": "nodeStrokeWidth",
+          "label": "Nodes · Border width (px)",
+          "description": "Outline thickness of the node bars, in pixels. 0 = no outline.",
+          "fieldType": "number",
+          "defaultValue": 0
+        },
+        {
           "name": "linkWidth",
           "label": "Links \u00b7 Width (px)",
           "description": "Stroke width of links, in pixels. Used when not scaling by a value field.",
@@ -260,6 +334,43 @@
           "defaultValue": false
         },
         {
+          "name": "linkColorMode",
+          "label": "Links \u00b7 Color mode",
+          "description": "How links are colored. Source = source node's color; Target = target node's color; Gradient = fades from source color to target color; Static = the Color above for all links.",
+          "fieldType": "choice",
+          "defaultValue": "static",
+          "typeMetadata": {
+            "variant": "dropdown",
+            "choices": [
+              { "label": "Source color", "value": "source" },
+              { "label": "Target color", "value": "target" },
+              { "label": "Gradient (source to target)", "value": "gradient" },
+              { "label": "Static color", "value": "static" }
+            ]
+          }
+        },
+        {
+          "name": "linkCurvature",
+          "label": "Links \u00b7 Curvature",
+          "description": "Curviness of the links from 0 (straight lines) to 1 (strongly curved arcs).",
+          "fieldType": "number",
+          "defaultValue": 0
+        },
+        {
+          "name": "linkHoverOpacity",
+          "label": "Links \u00b7 Hover opacity",
+          "description": "Opacity a link rises to on hover (0 to 1).",
+          "fieldType": "number",
+          "defaultValue": 0.75
+        },
+        {
+          "name": "linkHover",
+          "label": "Links \u00b7 Highlight whole path on hover",
+          "description": "When hovering a link, brighten its connected source and target nodes too.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
           "name": "showLabels",
           "label": "Labels \u00b7 Show node labels",
           "description": "Draw a text label next to each node.",
@@ -286,6 +397,77 @@
           "description": "Text color of node labels.",
           "fieldType": "string",
           "defaultValue": "#374151"
+        },
+        {
+          "name": "showNodeLabels",
+          "label": "Labels \u00b7 Show node labels",
+          "description": "Draw a text label beside each node. Works together with 'Show node labels' above; both must be on for labels to appear.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "nodeLabelPosition",
+          "label": "Labels \u00b7 Position",
+          "description": "Where labels sit relative to the node circle. Outside = above the circle; Inside = centered in the circle; Auto = outside-aware placement.",
+          "fieldType": "choice",
+          "defaultValue": "auto",
+          "typeMetadata": {
+            "variant": "dropdown",
+            "choices": [
+              { "label": "Auto", "value": "auto" },
+              { "label": "Outside", "value": "outside" },
+              { "label": "Inside", "value": "inside" }
+            ]
+          }
+        },
+        {
+          "name": "nodeLabelFontSize",
+          "label": "Labels \u00b7 Font size (px)",
+          "description": "Font size of the node labels, in pixels. Overrides the base Font size (px) above when set.",
+          "fieldType": "number",
+          "defaultValue": 12
+        },
+        {
+          "name": "nodeLabelColor",
+          "label": "Labels \u00b7 Color",
+          "description": "Text color of the node labels. Overrides the base Color above when set.",
+          "fieldType": "string",
+          "defaultValue": "#374151"
+        },
+        {
+          "name": "showNodeValues",
+          "label": "Labels \u00b7 Show node totals",
+          "description": "Draw the node's value centered inside each circle. Hidden automatically when the text would not fit the circle.",
+          "fieldType": "boolean",
+          "defaultValue": false
+        },
+        {
+          "name": "nodeValueField",
+          "label": "Labels \u00b7 Value field",
+          "description": "Node field whose value is drawn inside the circle (e.g. \"value\"). Blank = \"value\".",
+          "fieldType": "string",
+          "defaultValue": "value"
+        },
+        {
+          "name": "nodeValueFontSize",
+          "label": "Labels \u00b7 Value font size (px)",
+          "description": "Font size of the in-node value text, in pixels.",
+          "fieldType": "number",
+          "defaultValue": 9
+        },
+        {
+          "name": "nodeValueColor",
+          "label": "Labels \u00b7 Value color",
+          "description": "Text color of the in-node value. Default white reads well on the categorical node colors.",
+          "fieldType": "string",
+          "defaultValue": "#ffffff"
+        },
+        {
+          "name": "nodeValueFormat",
+          "label": "Labels \u00b7 Value format",
+          "description": "Optional d3-format specifier for numeric values, e.g. \",.0f\", \".1f\", \"~s\". Blank = raw value.",
+          "fieldType": "string",
+          "defaultValue": ""
         },
         {
           "name": "colorScheme",
@@ -334,6 +516,55 @@
               }
             ]
           }
+        },
+        {
+          "name": "useSeriesColors",
+          "label": "Colors \u00b7 Use per-node colors",
+          "description": "Use each node's own 'color' field when present. Falls back to the scheme/palette otherwise.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "colorPalette",
+          "label": "Colors \u00b7 Color palette",
+          "description": "JSON array of CSS colors used to color node groups when 'Use per-node colors' is off and Color scheme is Custom, e.g. [\"#2E93fA\",\"#66DA26\"].",
+          "fieldType": "json"
+        },
+        {
+          "name": "showLegend",
+          "label": "Legend \u00b7 Show legend",
+          "description": "Show a legend of node groups with color swatches.",
+          "fieldType": "boolean",
+          "defaultValue": true
+        },
+        {
+          "name": "legendPosition",
+          "label": "Legend \u00b7 Position",
+          "description": "Where to place the legend.",
+          "fieldType": "choice",
+          "defaultValue": "bottom",
+          "typeMetadata": {
+            "variant": "dropdown",
+            "choices": [
+              { "label": "Top", "value": "top" },
+              { "label": "Right", "value": "right" },
+              { "label": "Bottom", "value": "bottom" }
+            ]
+          }
+        },
+        {
+          "name": "legendFontSize",
+          "label": "Legend \u00b7 Font size",
+          "description": "Font size (px) for the legend text.",
+          "fieldType": "number",
+          "defaultValue": 12
+        },
+        {
+          "name": "legendInteractive",
+          "label": "Legend \u00b7 Clickable to toggle groups",
+          "description": "Let viewers click a legend item to hide/show that group's nodes. Hidden items stay in the legend (dimmed) so they can be toggled back.",
+          "fieldType": "boolean",
+          "defaultValue": false
         },
         {
           "name": "showTooltip",
@@ -458,5 +689,5 @@
       ]
     }
   },
-  "scopeName": "x_1295779_net_0"
+  "scopeName": "x_2114311_net_0"
 }

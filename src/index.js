@@ -1,1 +1,1 @@
-import './x-1295779-network-chart-uic';
+import "./x-2114311-network-chart-uic";

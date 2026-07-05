@@ -1,0 +1,68 @@
+[
+  {
+    "name": "table",
+    "label": "Relationship table",
+    "description": "Edge table where each record is a relationship, e.g. 'cmdb_rel_ci'.",
+    "fieldType": "string",
+    "mandatory": true,
+    "defaultValue": "cmdb_rel_ci"
+  },
+  {
+    "name": "filter",
+    "label": "Filter (encoded query)",
+    "description": "Optional encoded query to scope the relationships, e.g. by relationship type.",
+    "fieldType": "string",
+    "defaultValue": ""
+  },
+  {
+    "name": "sourceField",
+    "label": "Source reference field",
+    "description": "Reference field for the link source, e.g. 'parent'. Its sys_id becomes the node id, its display value the label.",
+    "fieldType": "string",
+    "mandatory": true,
+    "defaultValue": "parent"
+  },
+  {
+    "name": "targetField",
+    "label": "Target reference field",
+    "description": "Reference field for the link target, e.g. 'child'.",
+    "fieldType": "string",
+    "mandatory": true,
+    "defaultValue": "child"
+  },
+  {
+    "name": "sourceGroupField",
+    "label": "Source group field (optional)",
+    "description": "Dot-walked field giving the source node's category for colouring, e.g. 'parent.sys_class_name'.",
+    "fieldType": "string",
+    "defaultValue": ""
+  },
+  {
+    "name": "targetGroupField",
+    "label": "Target group field (optional)",
+    "description": "Dot-walked field giving the target node's category, e.g. 'child.sys_class_name'.",
+    "fieldType": "string",
+    "defaultValue": ""
+  },
+  {
+    "name": "linkValueField",
+    "label": "Link value field (optional)",
+    "description": "Numeric field weighting each link (drives link width when sizing by value). Blank = 1 per relationship.",
+    "fieldType": "string",
+    "defaultValue": ""
+  },
+  {
+    "name": "useDisplayValue",
+    "label": "Use display values for labels",
+    "description": "Label nodes by the reference field's display value (readable) instead of the raw value.",
+    "fieldType": "boolean",
+    "defaultValue": true
+  },
+  {
+    "name": "recordLimit",
+    "label": "Record limit (safety cap)",
+    "description": "Maximum relationships read. Default 5000.",
+    "fieldType": "number",
+    "defaultValue": 5000
+  }
+]

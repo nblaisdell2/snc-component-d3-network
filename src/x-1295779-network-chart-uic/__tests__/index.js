@@ -1,6 +1,6 @@
-// Tests for x-1295779-network-chart-uic
-describe('Test stub', () => {
-	it('should be true', () => {
+// Tests for x-2114311-network-chart-uic
+describe("Test stub", () => {
+	it("should be true", () => {
 		expect(true).toBe(true);
 	});
 });
